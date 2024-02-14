@@ -58,7 +58,10 @@ class CovidVisualizer:
 
 if __name__ == '__main__':
     visualizer = CovidVisualizer()
-    st.markdown("""<style>
-    .reportview-container .main footer {visibility: hidden;}
-    </style>""", unsafe_allow_html=True)
+    css = r'''
+        <style>
+            [data-testid="stForm"] {border: 0px}
+        </style>
+    '''
+    st.markdown(css, unsafe_allow_html=True)
     visualizer.run()
