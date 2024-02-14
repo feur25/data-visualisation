@@ -6,16 +6,6 @@ import base64
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
-hide_st_style = """
-            <style>
-            #MainMenu {visibility: hidden;}
-            footer {visibility: hidden;}
-            header {visibility: hidden;}
-            div.embeddedAppMetaInfoBar_container__DxxL1 {visibility: hidden;}
-            </style>
-            """
-st.markdown(hide_st_style, unsafe_allow_html=True)
-
 class CovidVisualizer:
     def __init__(self):
         self.df = pd.read_csv('data/owid-covid-latest.csv')
