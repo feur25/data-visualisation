@@ -5,6 +5,14 @@ import io
 import base64
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
+hide_st_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            header {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_st_style, unsafe_allow_html=True)
 
 class CovidVisualizer:
     def __init__(self):
@@ -58,15 +66,4 @@ class CovidVisualizer:
 
 if __name__ == '__main__':
     visualizer = CovidVisualizer()
-    css = """
-        <style>
-            .css-1l02zno {
-                display: none !important;
-            }
-            .css-1bxhl4t {
-                display: none !important;
-            }
-        </style>
-    """
-    st.markdown(css, unsafe_allow_html=True)
     visualizer.run()
