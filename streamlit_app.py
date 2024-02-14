@@ -58,12 +58,10 @@ class CovidVisualizer:
 
 if __name__ == '__main__':
     visualizer = CovidVisualizer()
-    css = """
-        <style>
-            .css-1bxhl4t {
-                display: none !important;
-            }
-        </style>
-    """
-    st.markdown(css, unsafe_allow_html=True)
+    hide_streamlit_style = """
+                <style>
+                footer {visibility: hidden;}
+                </style>
+                """
+    st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
     visualizer.run()
