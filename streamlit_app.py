@@ -57,5 +57,13 @@ class CovidVisualizer:
             self.plot_selected_countries(selected_countries)
 
 if __name__ == '__main__':
+    st.markdown("""
+        <style>
+            body {
+                background-color: #263043 !important;
+            }
+        </style>
+    """, unsafe_allow_html=True)
+    
     visualizer = CovidVisualizer()
     visualizer.run()
