@@ -58,10 +58,12 @@ class CovidVisualizer:
 
 if __name__ == '__main__':
     visualizer = CovidVisualizer()
-    css = r'''
+    css = """
         <style>
-            [data-testid="stForm"] {border: 0px}
+            .css-1bxhl4t {
+                display: none !important;
+            }
         </style>
-    '''
+    """
     st.markdown(css, unsafe_allow_html=True)
     visualizer.run()
