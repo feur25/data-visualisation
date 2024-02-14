@@ -5,7 +5,6 @@ import io
 import base64
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
-st.set_option('server.enableCORS', True)
 
 class CovidVisualizer:
     def __init__(self):
