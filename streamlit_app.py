@@ -3,7 +3,6 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import io
 
-st.set_page_config(page_title="Visualisation des données COVID-19", page_icon=":microbe:", layout="wide")
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
 class CovidVisualizer:
