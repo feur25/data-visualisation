@@ -27,15 +27,15 @@ class CovidVisualizer:
             ax.tick_params(axis='x', which='both', bottom=False, labelbottom=False)
             ax.tick_params(axis='y', colors='gray')  
         else:
-            bars = ax.bar(selected_data['location'], selected_data['total_deaths'], color='royalblue')
+            bars = ax.barh(selected_data['location'], selected_data['total_deaths'], color='royalblue')
             ax.set_xlabel('Pays', color='gray') 
             ax.set_ylabel('Nombre de morts', color='gray') 
             ax.set_title('Nombre de morts par pays', color='gray') 
-            ax.tick_params(axis='x', rotation=45, colors='gray')  
+            ax.tick_params(axis='x', colors='gray')  
             ax.tick_params(axis='y', colors='gray')  
             for bar, death_count in zip(bars, selected_data['total_deaths']):
                 if pd.notna(death_count):
-                    ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height(), str(int(death_count)), ha='center', va='bottom', color='gray') 
+                    ax.text(bar.get_width(), bar.get_y() + bar.get_height()/2, str(int(death_count)), va='center', color='gray') 
         
         buf = io.BytesIO()
         plt.savefig(buf, format='png', transparent=True)
@@ -60,15 +60,15 @@ class CovidVisualizer:
             ax.tick_params(axis='x', which='both', bottom=False, labelbottom=False)
             ax.tick_params(axis='y', colors='gray')  
         else:
-            bars = ax.bar(selected_data['location'], selected_data['new_cases'], color='darkorange')
+            bars = ax.barh(selected_data['location'], selected_data['new_cases'], color='darkorange')
             ax.set_xlabel('Pays', color='gray') 
             ax.set_ylabel('Nouveaux cas', color='gray') 
             ax.set_title('Nouveaux cas par pays', color='gray') 
-            ax.tick_params(axis='x', rotation=45, colors='gray')  
+            ax.tick_params(axis='x', colors='gray')  
             ax.tick_params(axis='y', colors='gray')  
             for bar, case_count in zip(bars, selected_data['new_cases']):
                 if pd.notna(case_count):
-                    ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height(), str(int(case_count)), ha='center', va='bottom', color='gray') 
+                    ax.text(bar.get_width(), bar.get_y() + bar.get_height()/2, str(int(case_count)), va='center', color='gray') 
         
         buf = io.BytesIO()
         plt.savefig(buf, format='png', transparent=True)
