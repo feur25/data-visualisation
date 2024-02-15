@@ -1,3 +1,4 @@
+#streamlit_app.py
 import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
@@ -7,11 +8,35 @@ st.set_page_config(page_title="Visualisation des données COVID-19", page_icon="
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
 class CovidVisualizer:
+    """
+    A class for visualizing COVID-19 data including total deaths and new cases by country.
+
+    Attributes:
+        df (pandas.DataFrame): A DataFrame containing COVID-19 data.
+        all_countries (list): A list of unique countries present in the DataFrame.
+
+    Methods:
+        plot_selected_countries(selected_countries): 
+            Plot total deaths for the selected countries.
+        plot_selected_new_cases(selected_countries): 
+            Plot new cases for the selected countries.
+        run(): 
+            Run the Streamlit application for data visualization.
+    """
     def __init__(self):
+        """
+        Initializes the CovidVisualizer class by loading COVID-19 data and getting unique countries.
+        """
         self.df = pd.read_csv('data/owid-covid-latest.csv')
         self.all_countries = self.df['location'].unique().tolist()
 
     def plot_selected_countries(self, selected_countries):
+        """
+        Plot total deaths for the selected countries.
+
+        Args:
+            selected_countries (list): A list of selected countries to visualize.
+        """
         selected_data = self.df[self.df['location'].isin(selected_countries)]
         selected_data = selected_data.sort_values(by='total_deaths', ascending=False)
         
@@ -45,6 +70,12 @@ class CovidVisualizer:
         st.image(image, use_column_width='auto')
 
     def plot_selected_new_cases(self, selected_countries):
+        """
+        Plot new cases for the selected countries.
+
+        Args:
+            selected_countries (list): A list of selected countries to visualize.
+        """
         selected_data = self.df[self.df['location'].isin(selected_countries)]
         selected_data = selected_data.sort_values(by='new_cases', ascending=False)
         
@@ -78,6 +109,9 @@ class CovidVisualizer:
         st.image(image, use_column_width='auto')
 
     def run(self):
+        """
+        Run the Streamlit application for data visualization.
+        """
         selected_countries = st.multiselect('Sélectionnez les pays:', self.all_countries)
         if selected_countries:
             col1, col2 = st.columns(2)
