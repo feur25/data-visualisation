@@ -3,6 +3,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import io
 
+st.set_page_config(page_title="Visualisation des données COVID-19", page_icon=":microbe:", layout="wide")
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
 class CovidVisualizer:
@@ -16,25 +17,25 @@ class CovidVisualizer:
         
         fig, ax = plt.subplots(figsize=(10, 5), facecolor='none', edgecolor='none')
         if len(selected_data) > 8: 
-            bars = ax.barh(selected_data['location'], selected_data['total_deaths'])
-            ax.set_ylabel('Pays', color='white') 
-            ax.set_xlabel('Nombre de morts', color='white') 
-            ax.set_title('Nombre de morts par pays', color='white') 
+            bars = ax.barh(selected_data['location'], selected_data['total_deaths'], color='royalblue')
+            ax.set_ylabel('Pays', color='gray') 
+            ax.set_xlabel('Nombre de morts', color='gray') 
+            ax.set_title('Nombre de morts par pays', color='gray') 
             for bar, death_count in zip(bars, selected_data['total_deaths']):
                 if pd.notna(death_count):  
-                    ax.text(bar.get_width(), bar.get_y() + bar.get_height()/2, str(int(death_count)), va='center', color='white') 
+                    ax.text(bar.get_width(), bar.get_y() + bar.get_height()/2, str(int(death_count)), va='center', color='gray') 
             ax.tick_params(axis='x', which='both', bottom=False, labelbottom=False)
-            ax.tick_params(axis='y', colors='white')  
+            ax.tick_params(axis='y', colors='gray')  
         else:
-            bars = ax.bar(selected_data['location'], selected_data['total_deaths'])
-            ax.set_xlabel('Pays', color='white') 
-            ax.set_ylabel('Nombre de morts', color='white') 
-            ax.set_title('Nombre de morts par pays', color='white') 
-            ax.tick_params(axis='x', rotation=45, colors='white')  
-            ax.tick_params(axis='y', colors='white')  
+            bars = ax.bar(selected_data['location'], selected_data['total_deaths'], color='royalblue')
+            ax.set_xlabel('Pays', color='gray') 
+            ax.set_ylabel('Nombre de morts', color='gray') 
+            ax.set_title('Nombre de morts par pays', color='gray') 
+            ax.tick_params(axis='x', rotation=45, colors='gray')  
+            ax.tick_params(axis='y', colors='gray')  
             for bar, death_count in zip(bars, selected_data['total_deaths']):
                 if pd.notna(death_count):
-                    ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height(), str(int(death_count)), ha='center', va='bottom', color='white') 
+                    ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height(), str(int(death_count)), ha='center', va='bottom', color='gray') 
         
         buf = io.BytesIO()
         plt.savefig(buf, format='png', transparent=True)
@@ -48,18 +49,18 @@ class CovidVisualizer:
         latest_data = latest_data.sort_values(by='total_deaths', ascending=False)
 
         fig, ax = plt.subplots(figsize=(10, 5), facecolor='none', edgecolor='none')
-        bars = ax.bar(latest_data['location'], latest_data['new_deaths'])
+        bars = ax.bar(latest_data['location'], latest_data['new_deaths'], color='darkorange')
 
-        ax.set_xlabel('Pays', color='white')
-        ax.set_ylabel('Nombre de nouveaux décès', color='white')
-        ax.set_title('Nouveaux décès par pays', color='white')
-        ax.tick_params(axis='x', rotation=45, colors='white')
-        ax.tick_params(axis='y', colors='white')
+        ax.set_xlabel('Pays', color='gray')
+        ax.set_ylabel('Nombre de nouveaux décès', color='gray')
+        ax.set_title('Nouveaux décès par pays', color='gray')
+        ax.tick_params(axis='x', rotation=45, colors='gray')
+        ax.tick_params(axis='y', colors='gray')
 
         for bar, death_count in zip(bars, latest_data['new_deaths']):
             if pd.notna(death_count):
                 ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height(), str(int(death_count)),
-                        ha='center', va='bottom', color='white')
+                        ha='center', va='bottom', color='gray')
 
         buf = io.BytesIO()
         plt.savefig(buf, format='png', transparent=True)
@@ -71,7 +72,7 @@ class CovidVisualizer:
     def run(self):
         selected_countries = st.multiselect('Sélectionnez les pays:', self.all_countries)
         if selected_countries:
-            col1, col2 = st.beta_columns(2)
+            col1, col2 = st.columns(2)
             with col1:
                 self.plot_selected_countries(selected_countries)
             with col2:
