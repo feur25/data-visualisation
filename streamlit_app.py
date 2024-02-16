@@ -45,27 +45,27 @@ class CovidVisualizer:
 
     def plot_selected_new_cases(self, selected_countries):
         selected_data = self.df[self.df['location'].isin(selected_countries)]
-        selected_data = selected_data.sort_values(by='new_cases', ascending=False)
+        selected_data = selected_data.sort_values(by='new_deaths', ascending=False)
         
         fig, ax = plt.subplots(figsize=(10, 5), facecolor='none', edgecolor='none')
         if len(selected_data) > 8: 
-            bars = ax.barh(selected_data['location'], selected_data['new_cases'], color='darkorange')
+            bars = ax.barh(selected_data['location'], selected_data['new_deaths'], color='darkorange')
             ax.set_ylabel('Pays', color='gray') 
             ax.set_xlabel('Nouveaux cas', color='gray') 
             ax.set_title('Nouveaux cas par pays', color='gray') 
-            for bar, case_count in zip(bars, selected_data['new_cases']):
+            for bar, case_count in zip(bars, selected_data['new_deaths']):
                 if pd.notna(case_count):  
                     ax.text(bar.get_width(), bar.get_y() + bar.get_height()/2, str(int(case_count)), va='center', color='gray') 
             ax.tick_params(axis='x', which='both', bottom=False, labelbottom=False)
             ax.tick_params(axis='y', colors='gray')  
         else:
-            bars = ax.bar(selected_data['location'], selected_data['new_cases'], color='darkorange')
+            bars = ax.bar(selected_data['location'], selected_data['new_deaths'], color='darkorange')
             ax.set_xlabel('Pays', color='gray') 
             ax.set_ylabel('Nouveaux cas', color='gray') 
             ax.set_title('Nouveaux cas par pays', color='gray') 
             ax.tick_params(axis='x', rotation=45, colors='gray')  
             ax.tick_params(axis='y', colors='gray')  
-            for bar, case_count in zip(bars, selected_data['new_cases']):
+            for bar, case_count in zip(bars, selected_data['new_deaths']):
                 if pd.notna(case_count):
                     ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height(), str(int(case_count)), ha='center', va='bottom', color='gray') 
         
