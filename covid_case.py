@@ -16,11 +16,11 @@ class CovidCaseVisualizer:
         
         fig, ax = plt.subplots(figsize=(10, 6), facecolor='none') 
         ax.barh(selected_data['location'], selected_data['total_cases'], color='royalblue')
-        ax.set_xlabel('Nombre de morts')
-        ax.set_ylabel('Pays')
-        ax.set_title('Nombre de morts par pays')
-        ax.tick_params(axis='x', labelcolor='gray')
-        ax.tick_params(axis='y', labelcolor='gray')
+        ax.set_xlabel('Nombre de morts', color='white')
+        ax.set_ylabel('Pays', color='white')
+        ax.set_title('Nombre de morts par pays', color='white')
+        ax.tick_params(axis='x', labelcolor='white')
+        ax.tick_params(axis='y', labelcolor='white')
         ax.invert_yaxis() 
         
         buf = io.BytesIO()
@@ -34,11 +34,11 @@ class CovidCaseVisualizer:
         
         fig, ax = plt.subplots(figsize=(10, 6), facecolor='none') 
         ax.bar(selected_data['location'], selected_data['new_cases'], color='darkorange')
-        ax.set_xlabel('Pays')
-        ax.set_ylabel('Nouveaux cas')
-        ax.set_title('Nouveaux cas par pays')
-        ax.tick_params(axis='x', rotation=45, labelcolor='gray')
-        ax.tick_params(axis='y', labelcolor='gray')
+        ax.set_xlabel('Pays', color='white')
+        ax.set_ylabel('Nouveaux cas', color='white')
+        ax.set_title('Nouveaux cas par pays', color='white')
+        ax.tick_params(axis='x', rotation=45, labelcolor='white')
+        ax.tick_params(axis='y', labelcolor='white')
         
         buf = io.BytesIO()
         plt.savefig(buf, format='png', transparent=True)
@@ -53,7 +53,7 @@ class CovidCaseVisualizer:
 
         fig, ax = plt.subplots(figsize=(8, 8), facecolor='none') 
         ax.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=140)
-        ax.set_title('Répartition des cas par pays')
+        ax.set_title('Répartition des cas par pays', color='white')
         
         buf = io.BytesIO()
         plt.savefig(buf, format='png', transparent=True)
