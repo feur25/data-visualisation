@@ -36,14 +36,27 @@ class CovidCaseVisualizer:
         ax.tick_params(axis='y', labelcolor='gray')
         st.pyplot(fig)
 
+    def plot_cases_distribution(self, selected_countries):
+        selected_data = self.df[self.df['location'].isin(selected_countries)]
+        total_cases = selected_data['total_cases'].sum()
+        labels = selected_data['location']
+        sizes = selected_data['total_cases'] / total_cases * 100
+
+        fig, ax = plt.subplots(figsize=(8, 8))
+        ax.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=140)
+        ax.set_title('Répartition des cas par pays')
+        st.pyplot(fig)
+
     def run(self):
         selected_countries = st.multiselect('Sélectionnez les pays:', self.all_countries)
         if selected_countries:
-            col1, col2 = st.columns(2)
+            col1, col2, col3 = st.columns(3)
             with col1:
                 self.plot_selected_countries(selected_countries)
             with col2:
                 self.plot_selected_new_cases(selected_countries)
+            with col3:
+                self.plot_cases_distribution(selected_countries)
 
 if __name__ == '__main__':
     visualizer = CovidCaseVisualizer()
