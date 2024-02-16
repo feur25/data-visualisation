@@ -1,6 +1,6 @@
 import pandas as pd
 import streamlit as st
-import plotly.graph_objs as go
+import matplotlib.pyplot as plt
 
 st.set_page_config(layout="wide")
 
@@ -13,42 +13,28 @@ class CovidCaseVisualizer:
         selected_data = self.df[self.df['location'].isin(selected_countries)]
         selected_data = selected_data.sort_values(by='total_cases', ascending=False)
         
-        fig = go.Figure()
-        fig.add_trace(go.Bar(
-            x=selected_data['total_cases'],
-            y=selected_data['location'],
-            orientation='h',
-            marker_color='royalblue'
-        ))
-
-        fig.update_layout(
-            title='Nombre de morts par pays',
-            xaxis_title='Nombre de morts',
-            yaxis_title='Pays',
-            template='plotly_dark'
-        )
-
-        st.plotly_chart(fig, use_container_width=True)
+        fig, ax = plt.subplots(figsize=(10, 6))
+        ax.barh(selected_data['location'], selected_data['total_cases'], color='royalblue')
+        ax.set_xlabel('Nombre de morts')
+        ax.set_ylabel('Pays')
+        ax.set_title('Nombre de morts par pays')
+        ax.tick_params(axis='x', labelcolor='gray')
+        ax.tick_params(axis='y', labelcolor='gray')
+        ax.invert_yaxis() 
+        st.pyplot(fig)
 
     def plot_selected_new_cases(self, selected_countries):
         selected_data = self.df[self.df['location'].isin(selected_countries)]
         selected_data = selected_data.sort_values(by='new_cases', ascending=False)
         
-        fig = go.Figure()
-        fig.add_trace(go.Bar(
-            x=selected_data['location'],
-            y=selected_data['new_cases'],
-            marker_color='darkorange'
-        ))
-
-        fig.update_layout(
-            title='Nouveaux cas par pays',
-            xaxis_title='Pays',
-            yaxis_title='Nouveaux cas',
-            template='plotly_dark'
-        )
-
-        st.plotly_chart(fig, use_container_width=True)
+        fig, ax = plt.subplots(figsize=(10, 6))
+        ax.bar(selected_data['location'], selected_data['new_cases'], color='darkorange')
+        ax.set_xlabel('Pays')
+        ax.set_ylabel('Nouveaux cas')
+        ax.set_title('Nouveaux cas par pays')
+        ax.tick_params(axis='x', rotation=45, labelcolor='gray')
+        ax.tick_params(axis='y', labelcolor='gray')
+        st.pyplot(fig)
 
     def run(self):
         selected_countries = st.multiselect('Sélectionnez les pays:', self.all_countries)
