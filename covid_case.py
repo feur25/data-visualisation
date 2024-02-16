@@ -13,7 +13,7 @@ class CovidCaseVisualizer:
         selected_data = self.df[self.df['location'].isin(selected_countries)]
         selected_data = selected_data.sort_values(by='total_cases', ascending=False)
         
-        fig, ax = plt.subplots(figsize=(10, 6))
+        fig, ax = plt.subplots(figsize=(10, 6), facecolor='none') 
         ax.barh(selected_data['location'], selected_data['total_cases'], color='royalblue')
         ax.set_xlabel('Nombre de morts')
         ax.set_ylabel('Pays')
@@ -27,7 +27,7 @@ class CovidCaseVisualizer:
         selected_data = self.df[self.df['location'].isin(selected_countries)]
         selected_data = selected_data.sort_values(by='new_cases', ascending=False)
         
-        fig, ax = plt.subplots(figsize=(10, 6))
+        fig, ax = plt.subplots(figsize=(10, 6), facecolor='none') 
         ax.bar(selected_data['location'], selected_data['new_cases'], color='darkorange')
         ax.set_xlabel('Pays')
         ax.set_ylabel('Nouveaux cas')
@@ -42,7 +42,7 @@ class CovidCaseVisualizer:
         labels = selected_data['location']
         sizes = selected_data['total_cases'] / total_cases * 100
 
-        fig, ax = plt.subplots(figsize=(8, 8))
+        fig, ax = plt.subplots(figsize=(8, 8), facecolor='none') 
         ax.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=140)
         ax.set_title('Répartition des cas par pays')
         st.pyplot(fig)
