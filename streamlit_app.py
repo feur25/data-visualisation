@@ -51,8 +51,8 @@ class CovidVisualizer:
         if len(selected_data) > 8: 
             bars = ax.barh(selected_data['location'], selected_data['new_deaths'], color='darkorange')
             ax.set_ylabel('Pays', color='gray') 
-            ax.set_xlabel('Nouveaux cas', color='gray') 
-            ax.set_title('Nouveaux cas par pays', color='gray') 
+            ax.set_xlabel('Nouveaux morts', color='gray') 
+            ax.set_title('Nouveaux morts par pays', color='gray') 
             for bar, case_count in zip(bars, selected_data['new_deaths']):
                 if pd.notna(case_count):  
                     ax.text(bar.get_width(), bar.get_y() + bar.get_height()/2, str(int(case_count)), va='center', color='gray') 
@@ -61,8 +61,8 @@ class CovidVisualizer:
         else:
             bars = ax.bar(selected_data['location'], selected_data['new_deaths'], color='darkorange')
             ax.set_xlabel('Pays', color='gray') 
-            ax.set_ylabel('Nouveaux cas', color='gray') 
-            ax.set_title('Nouveaux cas par pays', color='gray') 
+            ax.set_ylabel('Nouveaux morts', color='gray') 
+            ax.set_title('Nouveaux morts par pays', color='gray') 
             ax.tick_params(axis='x', rotation=45, colors='gray')  
             ax.tick_params(axis='y', colors='gray')  
             for bar, case_count in zip(bars, selected_data['new_deaths']):
