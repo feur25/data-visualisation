@@ -16,9 +16,9 @@ class CovidCaseVisualizer:
         
         fig, ax = plt.subplots(figsize=(10, 6), facecolor='none') 
         ax.barh(selected_data['location'], selected_data['total_cases'], color='royalblue')
-        ax.set_xlabel('Nombre de morts', color='white')
+        ax.set_xlabel('Nombre de cas', color='white')
         ax.set_ylabel('Pays', color='white')
-        ax.set_title('Nombre de morts par pays', color='white')
+        ax.set_title('Nombre de cas par pays', color='white')
         ax.tick_params(axis='x', labelcolor='white')
         ax.tick_params(axis='y', labelcolor='white')
         ax.invert_yaxis() 
